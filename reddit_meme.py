@@ -29,16 +29,25 @@ while True:
     rand_string = str(uuid.uuid4())[:6]
 
 
-    # Get the path to the default download directory
-    download_directory = os.path.join(tempfile.gettempdir(), 'Download')
+import os
 
+# Get the path to the Termux home directory
+home_directory = os.path.expanduser('~')
 
-    # Save the image to a file in the download directory
-    image_file_path = os.path.join(download_directory, f"programming_meme_{rand_string}.jpg")
-    with open(image_file_path, 'wb') as f:
-        f.write(response.content)
+# Specify the directory where you want to save the image
+save_directory = os.path.join(home_directory, 'Download')
 
-    print(f"Image saved at: {image_file_path}")
+# Create the save directory if it doesn't exist
+os.makedirs(save_directory, exist_ok=True)
+
+# ...
+
+# Save the image to a file in the specified directory
+image_file_path = os.path.join(save_directory, f"programming_meme_{rand_string}.jpg")
+with open(image_file_path, 'wb') as f:
+    f.write(response.content)
+
+print(f"Image saved at: {image_file_path}")
     print("-"*30)
     
     cont = input("\nDo you want to download another meme (y/n): ")
